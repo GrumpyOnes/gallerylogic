@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="GalleryLogic — photograph, correct, and catalog museum artworks on your iPhone and iPad."
+    />
+    <title>GalleryLogic — Museum Photography</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --text: #1a1a1a;
+        --muted: #555;
+        --bg: #f6f8fc;
+        --card: #fff;
+        --border: #e5e8ef;
+        --accent: #2f6fed;
+        --accent-soft: #e8f0ff;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --text: #f2f2f2;
+          --muted: #aaa;
+          --bg: #0f1115;
+          --card: #1a1d24;
+          --border: #2a2f3a;
+          --accent: #6b9bff;
+          --accent-soft: #1a2744;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+          sans-serif;
+        font-size: 16px;
+        line-height: 1.55;
+        color: var(--text);
+        background: var(--bg);
+      }
+      main {
+        max-width: 46rem;
+        margin: 0 auto;
+        padding: 2.5rem 1.25rem 3rem;
+      }
+      .hero {
+        text-align: center;
+        padding: 2rem 0 1.5rem;
+      }
+      .badge {
+        display: inline-block;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--accent);
+        background: var(--accent-soft);
+        padding: 0.35rem 0.75rem;
+        border-radius: 999px;
+        margin-bottom: 1rem;
+      }
+      h1 {
+        font-size: clamp(1.75rem, 5vw, 2.25rem);
+        line-height: 1.2;
+        margin: 0 0 0.75rem;
+        letter-spacing: -0.02em;
+      }
+      .tagline {
+        color: var(--muted);
+        font-size: 1.05rem;
+        max-width: 32rem;
+        margin: 0 auto 1.5rem;
+      }
+      .features {
+        display: grid;
+        gap: 0.85rem;
+        margin: 2rem 0;
+      }
+      .feature {
+        padding: 1.1rem 1.2rem;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 0.85rem;
+      }
+      .feature h2 {
+        font-size: 1rem;
+        margin: 0 0 0.35rem;
+      }
+      .feature p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+      .cta {
+        text-align: center;
+        margin: 2rem 0 1rem;
+        padding: 1.5rem 1rem;
+        border: 1px solid var(--border);
+        border-radius: 0.85rem;
+        background: var(--card);
+      }
+      .cta p {
+        margin: 0 0 0.75rem;
+        color: var(--muted);
+      }
+      .cta-note {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .footer-links {
+        margin-top: 2rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--border);
+        font-size: 0.9rem;
+        color: var(--muted);
+        text-align: center;
+      }
+      .lang-block {
+        margin-top: 2.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+      }
+      .lang-label {
+        font-size: 0.85rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .lang-block h1 {
+        font-size: 1.5rem;
+        text-align: left;
+      }
+      .lang-block .tagline {
+        text-align: left;
+        margin-left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <span class="badge">Museum &amp; Gallery</span>
+        <h1>GalleryLogic</h1>
+        <p class="tagline">
+          Photograph artworks, auto-correct perspective, and build a personal catalog — all on your
+          device.
+        </p>
+      </section>
+
+      <section class="features">
+        <article class="feature">
+          <h2>Shoot with purpose</h2>
+          <p>
+            Organize visits by collection and artwork. Capture paintings and labels with modes built
+            for museum workflows.
+          </p>
+        </article>
+        <article class="feature">
+          <h2>Perspective correction</h2>
+          <p>
+            Detect frames on device and straighten skewed photos while keeping a durable local copy
+            of your originals.
+          </p>
+        </article>
+        <article class="feature">
+          <h2>Your catalog, your device</h2>
+          <p>
+            Browse Collection → Artwork → Photo, edit metadata, and optionally sync corrected images
+            to the system Photos library.
+          </p>
+        </article>
+        <article class="feature">
+          <h2>Private by design</h2>
+          <p>
+            No account required. Your gallery stays on your phone unless you choose to save copies
+            elsewhere.
+          </p>
+        </article>
+      </section>
+
+      <section class="cta">
+        <p>Available on the App Store for iPhone and iPad.</p>
+        <p class="cta-note">
+          Questions? <a href="support.html">Technical support</a>
+          ·
+          <a href="privacy-policy.html">Privacy Policy</a>
+        </p>
+      </section>
+
+      <p class="footer-links">
+        <a href="support.html">Support</a>
+        ·
+        <a href="privacy-policy.html">Privacy</a>
+        ·
+        himkominn@gmail.com
+      </p>
+
+      <section class="lang-block" lang="zh-Hans">
+        <p class="lang-label">中文</p>
+        <h1>GalleryLogic</h1>
+        <p class="tagline">在博物馆与美术馆拍摄作品，自动透视校正，并在设备上建立个人图录。</p>
+
+        <section class="features">
+          <article class="feature">
+            <h2>为看展而拍</h2>
+            <p>按作品集与作品组织拍摄，针对画作与展签优化相机流程。</p>
+          </article>
+          <article class="feature">
+            <h2>透视校正</h2>
+            <p>在设备端检测画框并拉正倾斜照片，同时保留原始文件。</p>
+          </article>
+          <article class="feature">
+            <h2>本地图录</h2>
+            <p>按 作品集 → 作品 → 照片 浏览，编辑元数据，并可选同步到系统相册。</p>
+          </article>
+          <article class="feature">
+            <h2>注重隐私</h2>
+            <p>无需注册账号；图库默认保存在您的手机上。</p>
+          </article>
+        </section>
+
+        <section class="cta">
+          <p>适用于 iPhone 与 iPad，于 App Store 提供下载。</p>
+          <p class="cta-note">
+            <a href="support.html">技术支持</a>
+            ·
+            <a href="privacy-policy.html">隐私政策</a>
+          </p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
