@@ -12,6 +12,7 @@
         --bg: #fafafa;
         --card: #fff;
         --border: #e5e5e5;
+        --accent: #2f6fed;
       }
       @media (prefers-color-scheme: dark) {
         :root {
@@ -20,6 +21,7 @@
           --bg: #111;
           --card: #1c1c1c;
           --border: #333;
+          --accent: #6b9bff;
         }
       }
       * {
@@ -60,7 +62,18 @@
         padding-left: 1.25rem;
       }
       a {
-        color: inherit;
+        color: var(--accent);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .footer-links {
+        margin-top: 2rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--border);
+        font-size: 0.9rem;
+        color: var(--muted);
       }
       .lang-block {
         margin-top: 2.5rem;
@@ -272,6 +285,14 @@
         <h2>联系我们</h2>
         <p>如有隐私相关问题，请通过 App Store 页面或应用内反馈中所列的支持邮箱联系我们。</p>
       </section>
+
+      <p class="footer-links">
+        <a href="marketing.html">About GalleryLogic</a>
+        ·
+        <a href="support.html">Support</a>
+        ·
+        <a href="mailto:himkominn@gmail.com">himkominn@gmail.com</a>
+      </p>
     </main>
   </body>
 </html>
