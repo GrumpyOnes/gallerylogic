@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="GalleryLogic — photograph, correct, and catalog museum artworks on iPhone, iPad, and Android."
+    />
+    <title>GalleryLogic — Museum Photography</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --text: #141414;
+        --muted: #5c5c5c;
+        --bg: #f4f4f2;
+        --card: #ffffff;
+        --border: #e2e2de;
+        --accent: #2f6fed;
+        --accent-soft: #e8f0ff;
+        --radius: 1rem;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --text: #f2f2f2;
+          --muted: #a8a8a8;
+          --bg: #0e0f11;
+          --card: #1a1c22;
+          --border: #2c3038;
+          --accent: #6b9bff;
+          --accent-soft: #1a2744;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+          sans-serif;
+        font-size: 16px;
+        line-height: 1.55;
+        color: var(--text);
+        background: var(--bg);
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      main {
+        max-width: 56rem;
+        margin: 0 auto;
+        padding: 0 1.25rem 3.5rem;
+      }
+
+      /* Hero */
+      .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 2.75rem 0 2rem;
+      }
+      .app-icon-wrap {
+        margin: 0 0 1.25rem;
+        padding: 1rem 0 0 1rem;
+        border-radius: 1.5rem;
+        background: linear-gradient(
+          135deg,
+          color-mix(in srgb, var(--text) 24%, transparent) 0%,
+          transparent 68%
+        );
+      }
+      .app-icon {
+        display: block;
+        width: 5rem;
+        height: 5rem;
+        border-radius: 1.15rem;
+        margin: 0;
+        box-shadow: 4px 4px 10px color-mix(in srgb, var(--text) 12%, transparent);
+        transform: translate(0.3rem, 0.3rem)
+      }
+      .badge {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+        background: var(--accent-soft);
+        padding: 0.35rem 0.8rem;
+        border-radius: 999px;
+        margin-bottom: 0.85rem;
+      }
+      h1 {
+        font-size: clamp(2rem, 6vw, 2.75rem);
+        line-height: 1.15;
+        margin: 0 0 0.65rem;
+        letter-spacing: -0.03em;
+      }
+      .hero-tagline {
+        color: var(--muted);
+        font-size: 1.1rem;
+        max-width: 34rem;
+        margin: 0 auto 0.35rem;
+      }
+      .hero-tagline-zh {
+        color: var(--muted);
+        font-size: 1rem;
+        max-width: 34rem;
+        margin: 0 auto 1.75rem;
+      }
+
+      /* Download */
+      .download-panel {
+        display: grid;
+        gap: 1rem;
+        margin-bottom: 2.5rem;
+      }
+      @media (min-width: 640px) {
+        .download-panel {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .download-card {
+        padding: 1.35rem 1.4rem;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+      }
+      .download-card h2 {
+        font-size: 1.05rem;
+        margin: 0 0 0.5rem;
+      }
+      .download-card p {
+        margin: 0 0 1rem;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+      .btn-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.55rem 1rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border-radius: 0.6rem;
+        border: 1px solid var(--border);
+        background: var(--bg);
+        color: var(--text);
+        text-decoration: none;
+        transition: border-color 0.15s, background 0.15s;
+      }
+      .btn:hover {
+        text-decoration: none;
+        border-color: var(--accent);
+      }
+      .btn-primary {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background: color-mix(in srgb, var(--accent) 88%, #000);
+        border-color: color-mix(in srgb, var(--accent) 88%, #000);
+      }
+      .note {
+        margin-top: 0.75rem;
+        font-size: 0.82rem;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      /* Features with screenshots */
+      .showcase {
+        display: grid;
+        gap: 1.75rem;
+        margin: 2.5rem 0;
+      }
+      .showcase-item {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 1.5rem;
+        align-items: center;
+        padding: 1.25rem;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: calc(var(--radius) + 0.15rem);
+      }
+      .showcase-item.reverse {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
+      .showcase-item.reverse .showcase-media {
+        order: 2;
+      }
+      .showcase-item.reverse .showcase-copy {
+        order: 1;
+      }
+      .showcase-media {
+        border-radius: 0.65rem;
+        overflow: hidden;
+        background: var(--bg);
+      }
+      .showcase-media img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .showcase-copy h2 {
+        font-size: 1.1rem;
+        margin: 0 0 0.55rem;
+        letter-spacing: -0.02em;
+      }
+      .showcase-copy p {
+        margin: 0 0 0.65rem;
+        font-size: 0.9rem;
+        line-height: 1.55;
+        color: var(--text);
+      }
+      .showcase-copy .zh {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.55;
+      }
+      @media (max-width: 640px) {
+        .showcase-item,
+        .showcase-item.reverse {
+          grid-template-columns: 1fr;
+        }
+        .showcase-item.reverse .showcase-media,
+        .showcase-item.reverse .showcase-copy {
+          order: unset;
+        }
+      }
+
+      /* Pro */
+      .pro-card {
+        padding: 1.35rem 1.4rem;
+        background: var(--accent-soft);
+        border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--border));
+        border-radius: var(--radius);
+        margin: 2rem 0;
+      }
+      .pro-card h2 {
+        font-size: 1.05rem;
+        margin: 0 0 0.5rem;
+      }
+      .pro-card p {
+        margin: 0.35rem 0;
+        font-size: 0.92rem;
+        color: var(--muted);
+      }
+
+      /* Footer */
+      .footer-links {
+        margin-top: 2.5rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--border);
+        font-size: 0.9rem;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      /* Chinese section */
+      .lang-divider {
+        margin: 3rem 0 2rem;
+        text-align: center;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .lang-divider::before,
+      .lang-divider::after {
+        content: '';
+        display: inline-block;
+        width: 3rem;
+        height: 1px;
+        background: var(--border);
+        vertical-align: middle;
+        margin: 0 0.75rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <div class="app-icon-wrap">
+          <img
+            class="app-icon"
+            src="images/icon.png"
+            width="80"
+            height="80"
+            alt="GalleryLogic app icon"
+          />
+        </div>
+        <span class="badge">Museum &amp; Gallery</span>
+        <h1>GalleryLogic</h1>
+        <p class="hero-tagline">
+          Photograph artworks, auto-correct perspective, and build a personal catalog — all on your
+          device.
+        </p>
+        <p class="hero-tagline-zh">
+          在博物馆与美术馆拍摄作品，自动透视校正，在设备上建立个人图录。
+        </p>
+      </header>
+
+      <section class="download-panel" aria-label="Download">
+        <article class="download-card">
+          <h2>iPhone &amp; iPad</h2>
+          <p>Download from the App Store.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="#" id="app-store-link">App Store</a>
+          </div>
+          <br />
+          <p class="note">
+            The app is listed in select App Store regions outside mainland China. If the link is
+            unavailable in your store, try an Apple ID registered in a supported region (for
+            example Hong Kong, Taiwan, Japan, the United States, or Europe).
+          </p>
+        </article>
+
+        <article class="download-card">
+          <h2>Android</h2>
+          <p>Download the APK and install directly — pick the mirror that works best for you.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="#" id="android-cn-link">中国大陆网盘</a>
+            <a class="btn" href="https://github.com/GrumpyOnes/artshot/releases" id="android-github-link"
+              >GitHub Releases</a
+            >
+          </div>
+          <br />
+          <p class="note">
+            ARM64 build recommended for most phones. Allow installation from unknown sources if
+            prompted.
+          </p>
+        </article>
+      </section>
+
+      <section class="pro-card" aria-label="Pro">
+        <h2>GalleryLogic Pro</h2>
+        <p>
+          <strong>iOS:</strong> Upgrade in-app via App Store In-App Purchase.
+        </p>
+        <p>
+          <strong>Android (direct download):</strong> For an offline Pro license, contact
+          <a href="mailto:himkominn@gmail.com">himkominn@gmail.com</a>.
+        </p>
+        <p lang="zh-Hans">
+          <strong>Pro 版本：</strong>iOS 用户可在应用内购买；Android 直接下载版如需 Pro 授权，请邮件联系
+          <a href="mailto:himkominn@gmail.com">himkominn@gmail.com</a>。
+        </p>
+      </section>
+
+      <section class="showcase" aria-label="Features">
+        <article class="showcase-item">
+          <div class="showcase-media">
+            <img
+              src="images/screenshot-1.jpg"
+              width="400"
+              height="267"
+              alt="Collections screen organizing museum visits"
+              loading="lazy"
+            />
+          </div>
+          <div class="showcase-copy">
+            <h2>Your visits, neatly filed</h2>
+            <p>
+              Turn a folder of museum snapshots into visit records you can actually browse. Group
+              shots by exhibition or trip, add dates and companions, and return weeks later without
+              digging through the camera roll.
+            </p>
+            <p class="zh">
+              把一次看展里随手拍下的照片，整理成清晰可查的参观记录。按展览或行程分组，补上日期与同行者，数周后再想回味，不必在相册里翻找。
+            </p>
+          </div>
+        </article>
+
+        <article class="showcase-item reverse">
+          <div class="showcase-media">
+            <img
+              src="images/screenshot-2.jpg"
+              width="400"
+              height="267"
+              alt="Collection detail in dark mode"
+              loading="lazy"
+            />
+          </div>
+          <div class="showcase-copy">
+            <h2>Speaks your language, fits your lighting</h2>
+            <p>
+              Switch between English, Simplified or Traditional Chinese, and Japanese. Light and
+              dark themes adapt to bright gallery halls or late-night scrolling on the train ride
+              home.
+            </p>
+            <p class="zh">
+              界面提供英语、简体中文、繁体中文与日语，并可在浅色与深色主题间切换。明亮的展厅与回程路上的夜间浏览，都能用更顺眼的方式查看记录。
+            </p>
+          </div>
+        </article>
+
+        <article class="showcase-item">
+          <div class="showcase-media">
+            <img
+              src="images/screenshot-4.jpg"
+              width="400"
+              height="267"
+              alt="Artwork entry with metadata and multiple photos"
+              loading="lazy"
+            />
+          </div>
+          <div class="showcase-copy">
+            <h2>One artwork, many angles</h2>
+            <p>
+              Keep the full painting, a close-up of brushwork, and the wall label together under one
+              entry. Title, artist, year, and location stay attached so the story behind each piece
+              does not fade after you leave the museum.
+            </p>
+            <p class="zh">
+              同一幅作品可归档全景、局部与展牌等多张影像，题名、作者、年代与地点一并留存。展览结束很久之后，仍能快速找回当时站在画前的记忆。
+            </p>
+          </div>
+        </article>
+
+        <article class="showcase-item reverse">
+          <div class="showcase-media">
+            <img
+              src="images/screenshot-5.jpg"
+              width="400"
+              height="267"
+              alt="Camera with collection picker and photo or video modes"
+              loading="lazy"
+            />
+          </div>
+          <div class="showcase-copy">
+            <h2>Straighten the frame before you leave</h2>
+            <p>
+              Shoot from an angle and let the app correct perspective on your device. Choose a
+              collection before you capture, and flip between photo and video when a piece deserves
+              more than a single still.
+            </p>
+            <p class="zh">
+              斜对着画作拍摄也能在设备端拉正透视。开拍前选好要归入的作品集，照片与视频模式随时切换，动态装置或现场氛围也能完整留下。
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <p class="lang-divider" lang="zh-Hans">中文介绍</p>
+
+      <section class="download-panel" lang="zh-Hans" aria-label="下载">
+        <article class="download-card">
+          <h2>iPhone 与 iPad</h2>
+          <p>请前往 App Store 下载。</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="#" data-app-store-link>App Store</a>
+          </div>
+          <br />
+          <p class="note">
+            应用目前仅在部分海外地区的 App Store 上架，中国大陆区商店可能无法直接搜索或下载。若您无法访问，可尝试使用香港、台湾、日本、美国或欧洲等支持地区的
+            Apple ID 获取。
+          </p>
+        </article>
+
+        <article class="download-card">
+          <h2>Android</h2>
+          <p>下载 APK 后直接安装，请选择适合您的下载方式。</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="#" data-android-cn-link>中国大陆网盘</a>
+            <a class="btn" href="https://github.com/GrumpyOnes/artshot/releases" data-android-github-link
+              >GitHub Releases</a
+            >
+          </div>
+          <br />
+          <p class="note">建议使用 ARM64 版本；安装时如提示，请允许「未知来源」安装。</p>
+        </article>
+      </section>
+
+      <p class="footer-links">
+        <a href="support.html">Support / 技术支持</a>
+        ·
+        <a href="privacy-policy.html">Privacy / 隐私政策</a>
+        ·
+        <a href="mailto:himkominn@gmail.com">himkominn@gmail.com</a>
+      </p>
+    </main>
+    <script>
+      (function () {
+        var APP_STORE_URL = '';
+        var ANDROID_CN_URL = '';
+
+        function applyLinks() {
+          var appStore = APP_STORE_URL || '#';
+          var androidCn = ANDROID_CN_URL || '#';
+
+          document.querySelectorAll('#app-store-link, [data-app-store-link]').forEach(function (el) {
+            el.href = appStore;
+          });
+          document.querySelectorAll('#android-cn-link, [data-android-cn-link]').forEach(function (el) {
+            el.href = androidCn;
+          });
+        }
+
+        applyLinks();
+      })();
+    </script>
+  </body>
+</html>
